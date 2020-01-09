@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-8 mx-auto" align="center">
-        <h1 class="mb-5">Weather is Life</h1>
+        <h1 class="mb-5 animated bounceInDown">Weather is Life</h1>
         <div class=" mb-3 col-3">
           <input @keydown.enter="push"
-                 v-model="inputName" type="text" placeholder="search city...">
+                 class="animated fadeInUp" v-model="inputName" type="text" placeholder="search city...">
         </div>
       </div>
     </div>
@@ -35,13 +35,12 @@
 
 
 <style scoped>
-  .row{
-  background:url("https://www.thoughtco.com/thmb/ule8g-v2VAmyXfWEz6gdspGpi4o=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-993959156-9c2533b1ed7a42a2a148b5d30f0340eb.jpg") no-repeat center center;
-  background-size: cover;
-  height: 100vh !important;
+  .container-fluid{
+    background:url("https://www.thoughtco.com/thmb/ule8g-v2VAmyXfWEz6gdspGpi4o=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-993959156-9c2533b1ed7a42a2a148b5d30f0340eb.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
   }
   .col-8{
-    height: 100vh;
     padding-top: 250px;
     justify-content: center;
   }
@@ -50,23 +49,27 @@
     justify-content: center;
   }
   h1{
-    color:white;
-    font-weight: 400;
+    color: #ffeac2;
+    font-weight: 100;
   }
   input {
     outline: none;
     padding: 5px 30px;
     background-color: transparent;
-    font-weight: 600;
+    font-weight: 100;
     font-size: 25px;
     letter-spacing: 2px;
     border: none;
-    border-bottom : 2px solid white;
+    border-bottom : 2px solid #56d1ff;
     text-align: center;
-    color:white;
+    color:#56d1ff!important;
   }
   ::placeholder{
-    color:white!important;
+    color: #56d1ff;
+    transition: color .3s ease-in-out;
+  }
+  input:focus::placeholder{
+    color:transparent;
   }
   @media only screen and (min-device-width : 200px)and (max-device-width : 500px){
     h1{
@@ -77,7 +80,6 @@
       margin-top: 40px;
       font-size: 50px;
       width: 500px;
-      color:white;
     }
   }
   @media only screen and (min-device-width : 500px)and (max-device-width : 1200px){
@@ -89,7 +91,6 @@
       margin-top: 40px;
       font-size: 35px;
       width: 400px;
-      color:white;
     }
   }
 </style>

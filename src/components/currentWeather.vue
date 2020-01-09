@@ -1,56 +1,77 @@
 <template>
   <div class="fullContainer">
       <transition name="fade" mode="out-in">
-        <div key="a"  class="searchImg" v-if="city.name === '' " style="display:flex;justify-content:center;margin-top:300px;">
-      <img class="imgIcon" src="https://img.icons8.com/cotton/128/000000/search--v1.png" alt="Loading...">
-    </div>
+
+          <div key="a" v-if="city.name===''" class="loadingDiv mt-3" align="center">
+              <h2 class="mt-5 mb-4">Loading...</h2>
+              <div class="spinner-grow" role="status"></div>
+          </div>
 
         <div key="b" v-else >
         <div style="margin-top: 120px;margin-bottom: 30px;" align="center">
             <input
-                    class="newSearchInput"
+                    class="newSearchInput animated bounceInDown"
                     type="text"
                     v-model="newSearch"
                     @keydown.enter="push"
                     placeholder="search new city...">
         </div>
-      <div class="container">
-        <div class="row mx-auto pt-2">
-          <h3 class="mx-auto">{{city.name}} / {{city.country}}</h3>
-        </div>
-        <div class="infoContainer pl-3 pr-3 mb-4">
-         <div class="iconVsTemp">
-          <div class="iconContainer">
-              <!--http://openweathermap.org/img/wn/@2x.png-->
-            <img class="imgIcon" :src="img+city.icon+png" alt="">
-          </div>
-          <div class="tempContainer">
-              <p class="temp mx-auto">{{city.temp}}<span>°C</span></p>
-          </div>
-         </div>
-          <div class="durumContainer">
-            <div class="durum">
-              <p><img src="https://img.icons8.com/office/30/000000/pressure.png"> {{city.pressure}} hpa</p>
-              <p><img src="https://img.icons8.com/ultraviolet/30/000000/wet.png"> {{city.humidity}}%</p>
-              <p><img src="https://img.icons8.com/cotton/30/000000/wind-turbine-2.png"> {{city.wind_speed}} m/s</p>
-            </div>
-            <div class="durum">
-              <p style="height: 25px">{{city.condition}}</p>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <router-link
-            to="/forecast"
-            tag="p"
-            class="col-12"
-          >
-            <p  class="linkText">See 3 hours / 5 days forecast for {{city.name}}</p>
-          </router-link>
-        </div>
+            <div>
+                <transition name="fade" mode="out-in">
+                  <div key="a" v-if="city.condition===''" class="loadingDiv pt-5" align="center">
+                    <div class="spinner-grow mt-2 loading" role="status"></div>
+                </div>
+                  <div key="b" v-else class="container animated zoomIn">
+                    <div class="row mx-auto pt-2">
+                        <h3 class="mx-auto">{{city.name}} / {{city.country}}</h3>
+                    </div>
+                    <div class="infoContainer pl-3 pr-3 mb-4">
+                        <div class="iconVsTemp">
+                            <div class="iconContainer">
+                                <img class="imgIcon" :src="img+city.icon+png" alt="">
+                            </div>
+                            <div class="tempContainer">
+                                <p class="temp mx-auto">{{city.temp}}<span>°C</span></p>
+                            </div>
+                        </div>
+                        <div class="durumContainer">
+                            <div class="durum">
+                                <table>
+                                    <tr>
+                                        <td>Pressure </td>
+                                        <td>: <strong>{{city.pressure}} hpa</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Humidity </td>
+                                        <td>: <strong>{{city.humidity}}%</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wind </td>
+                                        <td>: <strong>{{city.wind_speed}} m/s</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cloudiness </td>
+                                        <td>: <strong>{{city.condition}}</strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <router-link
+                                to="/forecast"
+                                tag="p"
+                                class="col-12"
+                        >
+                            <p  class="linkText">See 3 hours / 5 days forecast for {{city.name}}</p>
+                        </router-link>
+                    </div>
 
-      </div>
+                </div>
+                </transition>
+            </div>
+
     </div>
       </transition>
   </div>
@@ -70,9 +91,9 @@
           wind_speed: "",
           icon: "",
         },
-          img : "/src/icons/",
-          png : ".png",
-        newSearch: ""
+        img : "/src/icons/",
+        png : ".png",
+        newSearch: "",
       }
     },
     created(){
@@ -80,16 +101,18 @@
       axios.get(url)
         .then(response=>{
           let data = response.data;
-          this.city = {
-            name : data.name,
-            country : data.sys.country,
-            temp : Math.round(data.main.temp - 273.15),
-            pressure : data.main.pressure,
-            humidity : data.main.humidity,
-            condition : data.weather[0].description,
-            wind_speed : data.wind.speed,
-            icon : data.weather[0].icon,
-          };
+          setTimeout(()=>{
+              this.city = {
+                  name : data.name,
+                  country : data.sys.country,
+                  temp : Math.round(data.main.temp - 273.15),
+                  condition : data.weather[0].description,
+                  pressure : data.main.pressure,
+                  humidity : data.main.humidity,
+                  wind_speed : data.wind.speed,
+                  icon : data.weather[0].icon,
+              };
+          },1500)
         }).catch(()=> {
         this.$router.push("/error")
       })
@@ -97,7 +120,26 @@
       methods : {
         push(){
             localStorage.setItem("cityName",this.newSearch);
-            window.location.reload();
+            this.city.condition='';
+            let url = "https://api.openweathermap.org/data/2.5/weather?q="+localStorage.getItem("cityName")+"&APPID=65d6a7fd3ce6b78c501c67c41ae3e9b8";
+            setTimeout(()=>{
+                axios.get(url)
+                    .then(response=>{
+                        let data = response.data;
+                        this.city = {
+                            name : data.name,
+                            country : data.sys.country,
+                            temp : Math.round(data.main.temp - 273.15),
+                            condition : data.weather[0].description,
+                            pressure : data.main.pressure,
+                            humidity : data.main.humidity,
+                            wind_speed : data.wind.speed,
+                            icon : data.weather[0].icon,
+                        };
+                    }).catch(()=> {
+                    this.$router.push("/error")
+                })
+            },2000)
         }
       }
 
@@ -105,6 +147,21 @@
 </script>
 
 <style scoped>
+    h2{
+        color:grey;
+    }
+    .spinner-grow{
+        width: 50px;
+        height: 50px;
+        background-color: #3086ba;
+    }
+    .loadingDiv{
+        height: 400px;
+        width: 400px;
+        margin: auto;
+        padding-top: 130px;
+    }
+    /*Componentler arası geçiş animasyonu*/
     .fade-enter{
         opacity: 0;
     }
@@ -117,9 +174,6 @@
         transition: opacity .3s;
         opacity: 0;
     }
-  .fullContainer{
-        min-height: 90vh;
-  }
   .newSearchInput{
     border:1px solid #bfbfbf;
     border-radius: 3px;
@@ -184,21 +238,8 @@
   }
   .durum{
     padding-top: 15px;
-    display: flex;
-    color : #636363;
+    color : #3e3e3e;
     font-weight: 100;
-  }
-  .durum p{
-    margin:5px;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-  }
-  .durum p:first-child{
-    margin-left:0;
-  }
-  p img{
-    margin-right: 2px;
   }
   .col-12{
     display: flex;
@@ -218,6 +259,18 @@
     cursor: pointer;
   }
   @media only screen and (min-device-width : 200px)and (max-device-width : 500px){
+      .loading{
+          margin-top: 130px!important;
+      }
+      h2{
+          font-size: 80px;
+          margin-top: 300px!important;
+          margin-bottom: 80px!important;
+      }
+      .spinner-grow{
+          width: 175px;
+          height: 175px;
+      }
       .container{
           min-width: 90vw;
           border-radius: 20px;
@@ -237,6 +290,7 @@
       }
       .temp{
           font-size: 180px;
+          font-weight: 400;
           color: #ffa136;
           display: flex;
       }
@@ -249,23 +303,12 @@
           justify-content: center;
 
       }
-      .durum p{
-          font-size: 45px;
-          margin-right: 60px;
-      }
-      .durum img{
-          height: 70px;
-          margin-right: 10px;
-      }
       .linkText{
           font-size: 37px;
           color:gray!important;
       }
       hr{
           border-top: 1px solid gray;
-      }
-      .searchImg{
-          margin-top: 450px!important;
       }
       input{
           font-size: 45px;
@@ -280,8 +323,28 @@
       input:focus{
           box-shadow: 0 0 0 10px #5a5f63!important;
       }
+      td{
+          font-size: 45px!important;
+          padding-left: 10px;
+          font-weight: normal;
+      }
+      strong{
+          font-weight: 500;
+      }
   }
   @media only screen and (min-device-width : 500px)and (max-device-width : 1200px){
+      .loading{
+          margin-top: 160px!important;
+      }
+      .spinner-grow{
+          width: 135px;
+          height: 135px;
+      }
+      h2{
+          font-size: 60px;
+          margin-top: 200px!important;
+          margin-bottom: 65px!important;
+      }
       .container{
       min-width: 75vw;
       margin-top: 60px;
@@ -306,6 +369,7 @@
           font-size: 130px;
           color: #ffa136;
           display: flex;
+          font-weight: normal;
       }
       span{
           font-size: 50px;
@@ -314,19 +378,10 @@
       .durum{
           display: flex;
           justify-content: center;
-          color: grey;
-      }
-      .durum p{
-          font-size: 35px;
-          margin-right: 60px;
-      }
-      .durum img{
-          height: 45px;
-          margin-right: 10px;
       }
       .linkText{
           font-size: 30px;
-          color: grey !important;
+          color: #5d5d5d !important;
       }
       hr{
           border-top: 1px solid gray;
@@ -343,6 +398,14 @@
       }
       input:focus{
           box-shadow: 0 0 0 10px #5a5f63!important;
+      }
+      td{
+          font-size: 40px!important;
+          padding-left: 10px;
+          font-weight: normal;
+      }
+      strong{
+          font-weight: 500;
       }
   }
 

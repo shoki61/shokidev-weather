@@ -4,7 +4,6 @@
     <transition name="fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <app-footer></app-footer>
   </div>
 </template>
 
@@ -20,7 +19,7 @@
 <style>
 
   body{
-    background-color: F2F7F9;
+    background-color: #F2F7F9;
   }
   .fade-enter{
     opacity: 0;
@@ -36,7 +35,7 @@
   }
   @media only screen and (min-device-width : 200px)and (max-device-width : 1200px){
     body{
-      background-color: F2F7F9;
+      background-color: #F2F7F9;
     }
   }
 
