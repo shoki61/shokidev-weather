@@ -2,13 +2,13 @@
   <div class="fullContainer">
       <transition name="fade" mode="out-in">
 
-          <div key="a" v-if="city.name===''" class="loadingDiv mt-3" align="center">
+          <div key="a" v-if="city.name===''" class="loadingDiv" align="center">
               <h2 class="mt-5 mb-4">Loading...</h2>
               <div class="spinner-grow" role="status"></div>
           </div>
 
         <div key="b" v-else >
-        <div style="margin-top: 120px;margin-bottom: 30px;" align="center">
+        <div style="margin-bottom: 30px;" align="center">
             <input
                     class="newSearchInput animated bounceInDown"
                     type="text"
@@ -147,13 +147,19 @@
 </script>
 
 <style scoped>
+    .fullContainer{
+        background:url("../assets/currentWbackImage.jpg") no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+    }
     h2{
-        color:grey;
+        color: #c6c6c6;
+        margin-top: 130px!important;
     }
     .spinner-grow{
         width: 50px;
         height: 50px;
-        background-color: #3086ba;
+        background-color: #44b3fc;
     }
     .loadingDiv{
         height: 400px;
@@ -175,34 +181,35 @@
         opacity: 0;
     }
   .newSearchInput{
-    border:1px solid #bfbfbf;
-    border-radius: 3px;
+    border:none;
+    border-bottom:2px solid #d8ca78;
+    background-color: transparent;
     width: 250px;
     text-align: center;
-    height: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    height: auto;
     outline: none;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 25px;
+    margin-top: 175px;
+    color: #d8ca78;
   }
-  input:focus{
-      box-shadow: 0 0 0 5px gray;
-      transition: box-shadow .5s ease-in-out;
+  ::placeholder{
+      color: #d8ca78;
+      font-weight: 400;
+      transition: color .3s ease-in-out;
   }
   input:focus::placeholder{
       color:transparent;
   }
   h3{
     font-weight: 400;
-    color: #0f8392;
+    color: #0fd6e5;
   }
   .container{
     width: 700px;
     margin:auto;
-    border : 1px solid grey;
-    box-shadow: 5px 5px 20px 5px #b4afaf;
     border-radius: 5px;
-    background-color: whitesmoke;
+    background-color: rgba(68, 66, 69, 0.62);
   }
   .iconVsTemp{
       display: flex;
@@ -218,7 +225,7 @@
   }
   .temp{
     font-size: 70px;
-    color : #2b5c81;
+    color : #a9afd0;
     font-weight: 100;
   }
   .iconContainer{
@@ -238,7 +245,7 @@
   }
   .durum{
     padding-top: 15px;
-    color : #3e3e3e;
+    color : #c5c5c5;
     font-weight: 100;
   }
   .col-12{
@@ -249,12 +256,12 @@
     margin: auto;
   }
   .col-12 p:hover{
-    color : #0c5460;
+    color : #0dc7d4;
     text-decoration:underline;
   }
   .col-12 .linkText{
     font-weight: 600;
-    color: #897465;
+    color: #c1aa90;
     transition: color .3s ease-in-out;
     cursor: pointer;
   }
@@ -334,23 +341,21 @@
   }
   @media only screen and (min-device-width : 500px)and (max-device-width : 1200px){
       .loading{
-          margin-top: 160px!important;
+        margin-top: 160px!important;
       }
       .spinner-grow{
-          width: 135px;
-          height: 135px;
+        width: 135px;
+        height: 135px;
       }
       h2{
-          font-size: 60px;
-          margin-top: 200px!important;
-          margin-bottom: 65px!important;
+        font-size: 60px;
+        margin-top: 200px!important;
+        margin-bottom: 65px!important;
       }
       .container{
-      min-width: 75vw;
-      margin-top: 60px;
-      border-radius: 20px;
-      background-color: whitesmoke;
-      box-shadow: 5px 5px 30px 2px grey;
+        min-width: 75vw;
+        margin-top: 60px;
+        border-radius: 20px;
       }
       h3{
           margin-top:15px;
@@ -369,7 +374,6 @@
           font-size: 130px;
           color: #ffa136;
           display: flex;
-          font-weight: normal;
       }
       span{
           font-size: 50px;
@@ -381,23 +385,17 @@
       }
       .linkText{
           font-size: 30px;
-          color: #5d5d5d !important;
       }
       hr{
           border-top: 1px solid gray;
       }
       input{
-          font-size: 35px;
+          font-size: 35px!important;
           width: 350px!important;
           height: 70px!important;
           margin-top: 70px;
           margin-bottom: 10px;
-          border:2px solid gray !important;
-          border-radius: 15px!important;
-          color:#5a5f63!important;
-      }
-      input:focus{
-          box-shadow: 0 0 0 10px #5a5f63!important;
+          border-bottom:2px solid #d8ca78 !important;
       }
       td{
           font-size: 40px!important;

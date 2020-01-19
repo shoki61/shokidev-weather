@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <router-link to="/" class="navbar-brand ml-4" @click.native="deleteName">
       <img src="https://img.icons8.com/officel/45/000000/chance-of-storm.png" alt="logo">
       <span>shokidev-weather</span>
@@ -21,6 +21,9 @@
 
 
 <style>
+  .navbar{
+    background-color: rgba(32, 45, 64, 0.83);
+  }
   span{
     margin-left: 10px;
     transition: color .2s ease-in-out;

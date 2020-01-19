@@ -36,7 +36,7 @@
 
 <style scoped>
   .container-fluid{
-    background:url("https://www.thoughtco.com/thmb/ule8g-v2VAmyXfWEz6gdspGpi4o=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-993959156-9c2533b1ed7a42a2a148b5d30f0340eb.jpg") no-repeat center center;
+    background:url("../assets/homeBackImage.jpg") no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
   }
@@ -49,23 +49,23 @@
     justify-content: center;
   }
   h1{
-    color: #ffeac2;
-    font-weight: 100;
+    color: #633f74;
+    font-weight: 400;
   }
   input {
     outline: none;
     padding: 5px 30px;
     background-color: transparent;
-    font-weight: 100;
+    font-weight: 500;
     font-size: 25px;
     letter-spacing: 2px;
     border: none;
-    border-bottom : 2px solid #56d1ff;
+    border-bottom : 2px solid #333333;
     text-align: center;
-    color:#56d1ff!important;
+    color: #333333 !important;
   }
   ::placeholder{
-    color: #56d1ff;
+    color: #333333;
     transition: color .3s ease-in-out;
   }
   input:focus::placeholder{
