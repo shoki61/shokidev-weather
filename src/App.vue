@@ -17,7 +17,9 @@
   }
 </script>
 <style>
-
+  body{
+    background-color: #c6b0de;
+  }
   .fade-enter{
     opacity: 0;
   }
