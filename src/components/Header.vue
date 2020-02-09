@@ -1,10 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <router-link to="/" class="navbar-brand ml-4" @click.native="deleteName">
-      <img src="https://img.icons8.com/officel/45/000000/chance-of-storm.png" alt="logo">
-      <span>shokidev-weather</span>
+      <img src="/src/assets/logo.png" alt="logo">
     </router-link>
-    <a href="https://github.com/shoki61/shoki-weather-app" target="_blank" class="github"><i class="fab fa-github"></i></a>
+    <a href="https://github.com/shoki61/shokidev-weather" title="github" target="_blank" class="github"><i class="fab fa-github"></i></a>
 
   </nav>
 </template>
@@ -23,10 +22,7 @@
 <style>
   .navbar{
     background-color: rgba(32, 45, 64, 0.83);
-  }
-  span{
-    margin-left: 10px;
-    transition: color .2s ease-in-out;
+    padding-top:10px;
   }
   .navbar-brand:hover span{
     color : #1ad0e9;

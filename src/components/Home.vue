@@ -36,7 +36,7 @@
 
 <style scoped>
   .container-fluid{
-    background:url("../assets/homeBackImage.jpg") no-repeat center center fixed;
+    background:url("/src/assets/homeBackImage.jpg") no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
   }
@@ -49,23 +49,23 @@
     justify-content: center;
   }
   h1{
-    color: #633f74;
+    color: #fee05b;
     font-weight: 400;
   }
   input {
     outline: none;
     padding: 5px 30px;
     background-color: transparent;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 25px;
     letter-spacing: 2px;
     border: none;
-    border-bottom : 2px solid #333333;
+    border-bottom : 0.05em solid #f9f1b1;
     text-align: center;
-    color: #333333 !important;
+    color: #f9f1b1 !important;
   }
   ::placeholder{
-    color: #333333;
+    color: #f9f1b1;
     transition: color .3s ease-in-out;
   }
   input:focus::placeholder{

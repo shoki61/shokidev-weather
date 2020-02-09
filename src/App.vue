@@ -18,9 +18,6 @@
 </script>
 <style>
 
-  body{
-    background-color: #F2F7F9;
-  }
   .fade-enter{
     opacity: 0;
   }

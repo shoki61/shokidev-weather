@@ -3,20 +3,20 @@
       <transition name="fade" mode="out-in">
 
           <div key="a" v-if="city.name===''" class="loadingDiv" align="center">
-              <h2 class="mt-5 mb-4">Loading...</h2>
+              <h2 class="mb-3">Loading...</h2>
               <div class="spinner-grow" role="status"></div>
           </div>
 
         <div key="b" v-else >
-        <div style="margin-bottom: 30px;" align="center">
-            <input
+          <div style="margin-bottom: 30px;" align="center">
+              <input
                     class="newSearchInput animated bounceInDown"
                     type="text"
                     v-model="newSearch"
                     @keydown.enter="push"
                     placeholder="search new city...">
-        </div>
-            <div>
+          </div>
+        <div>
                 <transition name="fade" mode="out-in">
                   <div key="a" v-if="city.condition===''" class="loadingDiv pt-5" align="center">
                     <div class="spinner-grow mt-2 loading" role="status"></div>
@@ -72,7 +72,7 @@
                 </transition>
             </div>
 
-    </div>
+        </div>
       </transition>
   </div>
 </template>
@@ -97,22 +97,23 @@
       }
     },
     created(){
+
       let url = "https://api.openweathermap.org/data/2.5/weather?q="+localStorage.getItem("cityName")+"&APPID=65d6a7fd3ce6b78c501c67c41ae3e9b8";
       axios.get(url)
         .then(response=>{
-          let data = response.data;
-          setTimeout(()=>{
-              this.city = {
-                  name : data.name,
-                  country : data.sys.country,
-                  temp : Math.round(data.main.temp - 273.15),
-                  condition : data.weather[0].description,
-                  pressure : data.main.pressure,
-                  humidity : data.main.humidity,
-                  wind_speed : data.wind.speed,
-                  icon : data.weather[0].icon,
-              };
-          },1500)
+            let data = response.data;
+            setTimeout(()=>{
+                this.city = {
+                    name : data.name,
+                    country : data.sys.country,
+                    temp : Math.round(data.main.temp - 273.15),
+                    condition : data.weather[0].description,
+                    pressure : data.main.pressure,
+                    humidity : data.main.humidity,
+                    wind_speed : data.wind.speed,
+                    icon : data.weather[0].icon,
+                };
+            },1000)
         }).catch(()=> {
         this.$router.push("/error")
       })
@@ -148,7 +149,7 @@
 
 <style scoped>
     .fullContainer{
-        background:url("../assets/currentWbackImage.jpg") no-repeat center center;
+        background:url("/src/assets/currentWbackImage.jpg") no-repeat center center;
         background-size: cover;
         height: 100vh;
     }
@@ -217,15 +218,15 @@
       align-items: center;
   }
   .imgIcon{
-      height: 130px;
+      height: 170px;
   }
   .infoContainer{
       display: flex;
       justify-content: center;
   }
   .temp{
-    font-size: 70px;
-    color : #a9afd0;
+    font-size: 85px;
+    color : #ff9000;
     font-weight: 100;
   }
   .iconContainer{
@@ -244,9 +245,16 @@
     font-size: 20px;
   }
   .durum{
-    padding-top: 15px;
-    color : #c5c5c5;
-    font-weight: 100;
+    padding-top: 25px;
+    color : #e6ffd8;
+    font-weight: 400;
+    font-size: 18px;
+  }
+  strong{
+      font-weight: 100;
+  }
+  hr{
+      background-color: #ff9710;
   }
   .col-12{
     display: flex;
@@ -281,7 +289,6 @@
       .container{
           min-width: 90vw;
           border-radius: 20px;
-          background-color: whitesmoke;
       }
       h3{
           font-size: 70px;
@@ -298,7 +305,6 @@
       .temp{
           font-size: 180px;
           font-weight: 400;
-          color: #ffa136;
           display: flex;
       }
       span{
@@ -312,23 +318,13 @@
       }
       .linkText{
           font-size: 37px;
-          color:gray!important;
-      }
-      hr{
-          border-top: 1px solid gray;
       }
       input{
-          font-size: 45px;
+          font-size: 45px!important;
           width: 550px!important;
           height: 90px!important;
-          margin-top: 150px;
+          margin-top: 250px!important;
           margin-bottom: 50px;
-          border:2px solid gray !important;
-          border-radius: 15px!important;
-          color:#5a5f63!important;
-      }
-      input:focus{
-          box-shadow: 0 0 0 10px #5a5f63!important;
       }
       td{
           font-size: 45px!important;

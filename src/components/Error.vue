@@ -1,8 +1,7 @@
 <template>
   <div class="container-fluid" align="center">
         <div class="error" align="center">
-          <h3><i class="fas fa-exclamation" style="font-size:23px"></i> Error</h3>
-          <p>Please try again !!!</p>
+            <p>No result for <span>"{{error}}"</span> </p>
           <button @click="push">Ok</button>
         </div>
   </div>
@@ -10,6 +9,11 @@
 
 <script>
   export default {
+      data(){
+          return{
+              error:localStorage.getItem('cityName')
+          }
+      },
     methods : {
       push(){
         localStorage.removeItem("cityName");
@@ -21,9 +25,12 @@
 
 <style scoped>
   p{
-    border: 1px dashed rgb(255, 76, 77);
     width: 50%;
     padding: 10px;
+    font-size: 20px;
+  }
+  span{
+      margin: 10px;
   }
   button{
     border-radius: 3px;
@@ -42,14 +49,6 @@
   }
   .container-fluid{
     margin-top: 250px;
-  }
-  .error{
-    width: 400px;
-    border-radius: 5px;
-    background-color:whitesmoke;
-    color: rgb(255, 76, 77);
-    border: 1px solid rgba(255, 76, 77, 0.8);
-    padding: 15px;
   }
   @media only screen and (min-device-width : 200px)and (max-device-width : 500px){
     .error{
